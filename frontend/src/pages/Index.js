@@ -5,6 +5,7 @@ class Index extends Component {
         return (
             <div>
                 <h1> Upload the files</h1>
+                <p>This is where the upload process happens</p>
             </div>
         );
     }
