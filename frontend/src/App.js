@@ -18,6 +18,7 @@ function App() {
         >
           SSD OAuth Assignment 2
         </a>
+        <h1>Ok cool</h1>
       </header>
     </div>
   );
