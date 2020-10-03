@@ -18,6 +18,7 @@ const App = () => {
 
   return (
     <div className="App">
+<<<<<<< HEAD
       <Container style={{ marginTop: 100 }}>
         <Row>
           <Col></Col>
@@ -56,6 +57,23 @@ const App = () => {
           <Col></Col>
         </Row>
       </Container>
+=======
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          SSD OAuth Assignment 2
+        </a>
+        <h1>Ok cool</h1>
+      </header>
+>>>>>>> master
     </div>
   );
 };
