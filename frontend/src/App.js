@@ -1,27 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import GoogleAuthentication from "./pages/Login";
+import CreateCalendar from "./pages/Dashboard";
+
+import { Container } from "react-bootstrap";
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          SSD OAuth Assignment 2
-        </a>
-        <h1>Ok cool</h1>
-      </header>
+      <Router>
+        <Container>
+          <Switch>
+            <Route exact path="/" component={GoogleAuthentication}></Route>
+
+            <Route path="/create" component={CreateCalendar}></Route>
+          </Switch>
+        </Container>
+      </Router>
     </div>
   );
-}
-
+};
 export default App;
