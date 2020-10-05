@@ -42,11 +42,11 @@ function insertEvent(auth, event) {
     location: event.testEvent.location,
     description: event.testEvent.description,
     start: {
-      dateTime: "2020-10-06T12:58:05-07:00",
+      dateTime: event.testEvent.start.dateTime,
       timeZone: "America/Los_Angeles",
     },
     end: {
-      dateTime: "2020-10-07T06:00:00-07:00",
+      dateTime: event.testEvent.end.dateTime,
       timeZone: "America/Los_Angeles",
     },
     // recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],

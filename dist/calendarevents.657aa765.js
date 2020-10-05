@@ -48288,16 +48288,20 @@ var CalenderEvents = function CalenderEvents() {
 
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
+    console.log(startdate);
     var splitDate = startdate.split("-");
-    var month = splitDate[0];
-    var date = splitDate[1];
-    var year = splitDate[2];
+    var month = splitDate[1];
+    var date = splitDate[2];
+    var year = splitDate[0];
+    console.log(enddate);
     var splitEnd = enddate.split("-");
-    var month_end = splitEnd[0];
-    var date_end = splitEnd[1];
-    var year_end = splitEnd[2];
-    var newStartDate = year + "-" + month + "-" + date + "T12:58:05-07:00";
-    var newEndDate = year_end + "-" + month_end + "-" + date_end + "T06:00:00-07:00";
+    var month_end = splitEnd[1];
+    var date_end = splitEnd[2];
+    var year_end = splitEnd[0];
+    var newStartDate = year + "-" + month + "-" + date + "T09:00:00-07:00";
+    console.log("New Start Date: " + newStartDate);
+    var newEndDate = year_end + "-" + month_end + "-" + date_end + "T17:00:00-07:00";
+    console.log("New End Date: " + newEndDate);
     var testEvent = {
       summary: summary,
       location: location,
@@ -48327,17 +48331,7 @@ var CalenderEvents = function CalenderEvents() {
       setStartdate("");
       setEnddate("");
       window.location.reload();
-    }, 2000); // axios
-    //   .post("/create", {
-    //     firstName: "Fred",
-    //     lastName: "Flintstone",
-    //   })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    }, 2000);
   };
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_calendar.default, null), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, data.length == 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement("h4", null, "No Events Found"), /*#__PURE__*/_react.default.createElement("hr", null))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement("h4", null, "Scheduled Events"), /*#__PURE__*/_react.default.createElement("hr", null), /*#__PURE__*/_react.default.createElement("br", null))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, data.map(function (item, i) {
@@ -48389,7 +48383,7 @@ var CalenderEvents = function CalenderEvents() {
     type: "date",
     placeholder: "Select start date",
     onChange: function onChange(e) {
-      return setStartdate(e.target.value);
+      setStartdate(e.target.value);
     }
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicEmail"
@@ -48398,7 +48392,7 @@ var CalenderEvents = function CalenderEvents() {
     type: "date",
     placeholder: "Select end date",
     onChange: function onChange(e) {
-      return setEnddate(e.target.value);
+      setEnddate(e.target.value);
     }
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     variant: "success",
@@ -48435,7 +48429,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40955" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46547" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -31,19 +31,24 @@ const CalenderEvents = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
+    console.log(startdate);
     let splitDate = startdate.split("-");
-    let month = splitDate[0];
-    let date = splitDate[1];
-    let year = splitDate[2];
+    let month = splitDate[1];
+    let date = splitDate[2];
+    let year = splitDate[0];
 
+    console.log(enddate);
     let splitEnd = enddate.split("-");
-    let month_end = splitEnd[0];
-    let date_end = splitEnd[1];
-    let year_end = splitEnd[2];
+    let month_end = splitEnd[1];
+    let date_end = splitEnd[2];
+    let year_end = splitEnd[0];
 
-    let newStartDate = year + "-" + month + "-" + date + "T12:58:05-07:00";
+    let newStartDate = year + "-" + month + "-" + date + "T09:00:00-07:00";
+    console.log("New Start Date: " + newStartDate);
     let newEndDate =
-      year_end + "-" + month_end + "-" + date_end + "T06:00:00-07:00";
+      year_end + "-" + month_end + "-" + date_end + "T17:00:00-07:00";
+
+    console.log("New End Date: " + newEndDate);
 
     var testEvent = {
       summary: summary,
@@ -82,18 +87,6 @@ const CalenderEvents = () => {
 
       window.location.reload();
     }, 2000);
-
-    // axios
-    //   .post("/create", {
-    //     firstName: "Fred",
-    //     lastName: "Flintstone",
-    //   })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
   };
 
   return (
@@ -204,7 +197,9 @@ const CalenderEvents = () => {
                   name="startdate"
                   type="date"
                   placeholder="Select start date"
-                  onChange={(e) => setStartdate(e.target.value)}
+                  onChange={(e) => {
+                    setStartdate(e.target.value);
+                  }}
                 />
               </Form.Group>
 
@@ -214,7 +209,9 @@ const CalenderEvents = () => {
                   name="enddate"
                   type="date"
                   placeholder="Select end date"
-                  onChange={(e) => setEnddate(e.target.value)}
+                  onChange={(e) => {
+                    setEnddate(e.target.value);
+                  }}
                 />
               </Form.Group>
 
