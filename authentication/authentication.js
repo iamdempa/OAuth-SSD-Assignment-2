@@ -4,9 +4,9 @@ const { google } = require("googleapis");
 
 const credentials = require("../credentials.json");
 
-// const SCOPES = ['https://www.googleapis.com/auth/contacts https://www.googleapis.com/auth/userinfo.profile'];
 const SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
+// token path
 const TOKEN_PATH = "./token.json";
 
 const client_id = credentials.web.client_id;
@@ -18,7 +18,7 @@ const oAuth2Client = new google.auth.OAuth2(
   redirect_uris[0]
 );
 
-function getAuthUrl() {
+function getRedirectAuthenticationURL() {
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,
@@ -27,13 +27,13 @@ function getAuthUrl() {
   return authUrl;
 }
 
-function storeToken(code) {
+function saveTheToken(code) {
   oAuth2Client.getToken(code, (err, token) => {
     if (err) return console.error("Error retrieving access token", err);
     oAuth2Client.setCredentials(token);
     fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
       if (err) return console.error(err);
-      console.log("Token stored to", TOKEN_PATH);
+      console.log("Token is saved to:", TOKEN_PATH);
     });
   });
 }
@@ -52,12 +52,12 @@ function getNewToken(oAuth2Client) {
     access_type: "offline",
     scope: SCOPES,
   });
-  console.log("Authorize this app by visiting this url:", authUrl);
+  console.log("Visit the URl to autherize the App:", authUrl);
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question("Enter the code from that page here: ", (code) => {
+  rl.question("Enter the code value: ", (code) => {
     rl.close();
     oAuth2Client.getToken(code, (err, token) => {
       if (err) return console.error("Error retrieving access token", err);
@@ -73,6 +73,6 @@ function getNewToken(oAuth2Client) {
 module.exports = {
   SCOPES,
   authorize,
-  getAuthUrl,
-  storeToken,
+  getRedirectAuthenticationURL,
+  saveTheToken,
 };

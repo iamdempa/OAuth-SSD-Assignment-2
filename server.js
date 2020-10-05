@@ -5,8 +5,8 @@ const fs = require("fs");
 const Bundler = require("parcel-bundler");
 const bundler = new Bundler("./public/index.html");
 
-const auth = require("./auth/auth");
-const controller = require("./controller/operations");
+const auth = require("./authentication/authentication");
+const controller = require("./calenderAPI/API");
 
 const app = express();
 
@@ -15,14 +15,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  const url = auth.getAuthUrl();
+  const url = auth.getRedirectAuthenticationURL();
   res.redirect(url);
   //   res.redirect("/ok");
 });
 
 app.get("/auth", (req, res) => {
   let params = parseParams(req);
-  auth.storeToken(params["code"]);
+  auth.saveTheToken(params["code"]);
   res.redirect("/home");
 });
 
@@ -54,20 +54,18 @@ app.get("/events", (req, res) => {
 //   }, 4000);
 // });
 
-// app.post("/new-contact", (req, res) => {
-//   let contact = req.body;
-//   let response = null;
-//   fs.readFile("credentials.json", (err, content) => {
-//     let authObj = auth.authorize();
-//     setTimeout(() => {
-//       let result = controller.insertContact(authObj, contact);
-//       result.then((data) => {
-//         response = data;
-//         res.json(response);
-//       });
-//     }, 2000);
-//   });
-// });
+app.post("/create", (req, res) => {
+  let event = req.body;
+
+  let response = null;
+
+  fs.readFile("credentials.json", (err, content) => {
+    let authObj = auth.authorize();
+
+    let result = controller.insertEvent(authObj, event);
+    // console.log(result);
+  });
+});
 
 app.use(bundler.middleware());
 
@@ -75,6 +73,7 @@ app.use(express.static("./dist"));
 
 app.get("/home", (req, res) => {
   res.sendFile("./dist/index.html");
+  // res.sendFile("./public/signin.js");
 });
 
 function parseParams(req) {
