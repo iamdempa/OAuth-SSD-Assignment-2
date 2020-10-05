@@ -83,7 +83,7 @@ const CalenderEvents = () => {
       setErrors(true);
     }
 
-    alert(errors);
+    // alert(errors);
 
     setTimeout(function () {
       setSummary("");
