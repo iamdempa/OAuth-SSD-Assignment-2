@@ -11,7 +11,7 @@ import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 
 const CalenderEvents = () => {
   const [data, setData] = useState([]);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(false);
 
   const [summary, setSummary] = useState("");
   const [location, setLocation] = useState("");
@@ -64,19 +64,26 @@ const CalenderEvents = () => {
       },
     };
 
-    axios
-      .post("http://localhost:5000/create", {
-        testEvent,
-      })
+    try {
+      axios
+        .post("http://localhost:5000/create", {
+          testEvent,
+        })
 
-      .then(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        .then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      setErrors(false);
+    } catch (error) {
+      setErrors(true);
+    }
+
+    alert(errors);
 
     setTimeout(function () {
       setSummary("");

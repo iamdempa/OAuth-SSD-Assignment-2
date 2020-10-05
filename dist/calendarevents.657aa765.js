@@ -48247,7 +48247,7 @@ var CalenderEvents = function CalenderEvents() {
       data = _useState2[0],
       setData = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
+  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
       errors = _useState4[0],
       setErrors = _useState4[1];
@@ -48316,14 +48316,21 @@ var CalenderEvents = function CalenderEvents() {
       }
     };
 
-    _axios.default.post("http://localhost:5000/create", {
-      testEvent: testEvent
-    }).then(function (response) {
-      console.log(response);
-    }, function (error) {
-      console.log(error);
-    });
+    try {
+      _axios.default.post("http://localhost:5000/create", {
+        testEvent: testEvent
+      }).then(function (response) {
+        console.log(response);
+      }, function (error) {
+        console.log(error);
+      });
 
+      setErrors(false);
+    } catch (error) {
+      setErrors(true);
+    }
+
+    alert(errors);
     setTimeout(function () {
       setSummary("");
       setLocation("");
@@ -48429,7 +48436,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46547" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42545" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
