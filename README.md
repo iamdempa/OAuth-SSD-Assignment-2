@@ -36,3 +36,9 @@ npm start
 > a. This will run the application in your localhost environment with port `5000`
 
 > b. Head over to your favourite browser and hit `localhost:5000`
+
+
+
+### 4. Troubleshoot
+
+In case you get an error, this is mostly because the token is expired. Delete the `token.json` and hit the `localhost:5000` again to genereate a new token.
