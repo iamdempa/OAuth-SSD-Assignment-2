@@ -1,37 +1,7 @@
 const { google } = require("googleapis");
 
-function listConnectionNames(auth) {
-  const service = google.people({ version: "v1", auth });
-  let contacts = service.people.connections
-    .list({
-      resourceName: "people/me",
-      pageSize: 100,
-      personFields: "photos,names,phoneNumbers",
-    })
-    .then((res) => {
-      return res.data.connections;
-    })
-    .catch((err) => {
-      console.log("Error: ", err);
-    });
 
-  return contacts;
-}
-
-function insertContact(auth, contact) {
-  const service = google.people({ version: "v1", auth });
-  service.people.createContact(
-    {
-      parent: "people/me",
-      resource: contact,
-    },
-    {},
-    function (err, res) {
-      console.log(err);
-    }
-  );
-}
-
+// api to create a new calender event 
 function insertEvent(auth, event) {
   const calendar = google.calendar({ version: "v3", auth });
 
@@ -49,13 +19,15 @@ function insertEvent(auth, event) {
       dateTime: event.testEvent.end.dateTime,
       timeZone: "America/Los_Angeles",
     },
-    // recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
     attendees: [{ email: "jbjayarathna@gmail.com" }],
     reminders: {
       useDefault: true,
     },
   };
 
+
+
+  // insert the event 
   calendar.events.insert(
     {
       auth: auth,
@@ -74,6 +46,8 @@ function insertEvent(auth, event) {
   );
 }
 
+
+// list all the events 
 function listEvents(auth) {
   const calendar = google.calendar({ version: "v3", auth });
   let eventList = calendar.events
@@ -94,6 +68,8 @@ function listEvents(auth) {
   return eventList;
 }
 
+
+// export the modules 
 module.exports = {
   listConnectionNames,
   insertContact,
