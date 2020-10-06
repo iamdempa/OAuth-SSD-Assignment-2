@@ -5,8 +5,8 @@ Implemented a web application that consumes the service of an OAuth Authorizatio
 
 IT Number | Name
 ------------ | -------------
-IT 17157124 | K.M.J.B.Jayarathna
-IT  | Madhawa Subasinghe
+IT 17157124 | Jayarathna K.M.J.B
+IT 17134736 | Subasinghe S.M.M.K
 
 
 # How to run?
