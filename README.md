@@ -33,5 +33,6 @@ npm install
 npm start
 ```
 
-a. This will run the application in your localhost environment with port `5000`
-b. Head over to your favourite browser and hit `localhost:5000`
+> a. This will run the application in your localhost environment with port `5000`
+
+> b. Head over to your favourite browser and hit `localhost:5000`
