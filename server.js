@@ -20,40 +20,28 @@ app.get("/", (req, res) => {
   //   res.redirect("/ok");
 });
 
+// autherize and save the token
 app.get("/auth", (req, res) => {
   let params = parseParams(req);
   auth.saveTheToken(params["code"]);
   res.redirect("/home");
 });
 
+// api call to get all the events for that particular user
 app.get("/events", (req, res) => {
   let response = null;
   let authObj = auth.authorize();
 
-  // setTimeout(() => {
   let result = controller.listEvents(authObj);
 
   result.then((data) => {
     response = data;
-    // console.log(data)
+
     res.json(response);
   });
-  // }, 1000);
 });
 
-// app.get("/contacts", (req, res) => {
-//   let response = null;
-//   let authObj = auth.authorize();
-
-//   setTimeout(() => {
-//     let result = controller.listConnectionNames(authObj);
-//     result.then((data) => {
-//       response = data;
-//       res.json(response);
-//     });
-//   }, 4000);
-// });
-
+// api to create a new calender event
 app.post("/create", (req, res) => {
   let event = req.body;
 
@@ -63,7 +51,6 @@ app.post("/create", (req, res) => {
     let authObj = auth.authorize();
 
     let result = controller.insertEvent(authObj, event);
-    // console.log(result);
   });
 });
 
@@ -73,7 +60,6 @@ app.use(express.static("./dist"));
 
 app.get("/home", (req, res) => {
   res.sendFile("./dist/index.html");
-  // res.sendFile("./public/signin.js");
 });
 
 function parseParams(req) {
@@ -91,5 +77,7 @@ function parseParams(req) {
   return result;
 }
 
+
+// start the app 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server Started at ${PORT}`));
