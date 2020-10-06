@@ -25,8 +25,6 @@ function insertEvent(auth, event) {
     },
   };
 
-
-
   // insert the event 
   calendar.events.insert(
     {
@@ -71,8 +69,6 @@ function listEvents(auth) {
 
 // export the modules 
 module.exports = {
-  listConnectionNames,
-  insertContact,
   insertEvent,
   listEvents,
 };

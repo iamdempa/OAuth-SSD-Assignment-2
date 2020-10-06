@@ -10,6 +10,8 @@ const controller = require("./calenderAPI/API");
 
 const app = express();
 
+
+// middlewares 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -62,6 +64,7 @@ app.get("/home", (req, res) => {
   res.sendFile("./dist/index.html");
 });
 
+// get the parameter and append 
 function parseParams(req) {
   let q = req.url.split("?"),
     result = {};

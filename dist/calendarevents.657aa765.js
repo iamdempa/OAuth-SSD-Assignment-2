@@ -48242,6 +48242,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CalenderEvents = function CalenderEvents() {
+  // hooks to set values of the form
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       data = _useState2[0],
@@ -48275,7 +48276,8 @@ var CalenderEvents = function CalenderEvents() {
   var _useState13 = (0, _react.useState)(""),
       _useState14 = _slicedToArray(_useState13, 2),
       enddate = _useState14[0],
-      setEnddate = _useState14[1];
+      setEnddate = _useState14[1]; // get events on the component render
+
 
   (0, _react.useEffect)(function () {
     fetch("/events").then(function (res) {
@@ -48284,7 +48286,7 @@ var CalenderEvents = function CalenderEvents() {
       console.log(res);
       setData(res);
     });
-  }, []);
+  }, []); // onclcik event of the submit button
 
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
@@ -48325,12 +48327,12 @@ var CalenderEvents = function CalenderEvents() {
         console.log(error);
       });
 
-      setErrors(true);
+      setErrors(false);
     } catch (error) {
       setErrors(true);
-    }
+    } // alert(errors);
 
-    alert(errors);
+
     setTimeout(function () {
       setSummary("");
       setLocation("");
@@ -48436,7 +48438,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38505" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41331" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
