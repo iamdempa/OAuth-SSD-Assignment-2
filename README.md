@@ -11,7 +11,7 @@ IT  | Madhawa Subasinghe
 
 # How to run?
 
-## 1. Clone the repository
+### 1. Clone the repository
 
 ```
 git clone https://github.com/iamdempa/OAuth-SSD-Assignment-2.git
@@ -19,14 +19,14 @@ git clone https://github.com/iamdempa/OAuth-SSD-Assignment-2.git
 cd OAuth-SSD-Assignment-2
 ```
 
-## 2. Install the dependencies
+### 2. Install the dependencies
 
 ```
 npm install
 ```
 
 
-## 3. Run the application
+### 3. Run the application
 
 
 ```
