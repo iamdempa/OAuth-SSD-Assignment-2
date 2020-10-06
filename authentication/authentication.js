@@ -2,8 +2,10 @@ const fs = require("fs");
 const readline = require("readline");
 const { google } = require("googleapis");
 
+// get the credentials 
 const credentials = require("../credentials.json");
 
+// scopes for full access to calendar api
 const SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
 // token path
@@ -18,6 +20,7 @@ const oAuth2Client = new google.auth.OAuth2(
   redirect_uris[0]
 );
 
+// get the redirect url 
 function getRedirectAuthenticationURL() {
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: "offline",
@@ -27,6 +30,7 @@ function getRedirectAuthenticationURL() {
   return authUrl;
 }
 
+// save the token to the local drive 
 function saveTheToken(code) {
   oAuth2Client.getToken(code, (err, token) => {
     if (err) return console.error("Error retrieving access token", err);
@@ -38,12 +42,14 @@ function saveTheToken(code) {
   });
 }
 
+// authorize
 function authorize() {
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) getNewToken(oAuth2Client);
     else oAuth2Client.setCredentials(JSON.parse(token));
   });
 
+  // returns the Auth object 
   return oAuth2Client;
 }
 

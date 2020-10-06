@@ -1,3 +1,4 @@
+// import the necessary packages
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
@@ -10,6 +11,7 @@ import axios from "axios";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 
 const CalenderEvents = () => {
+  // hooks to set values of the form
   const [data, setData] = useState([]);
   const [errors, setErrors] = useState(false);
 
@@ -19,6 +21,7 @@ const CalenderEvents = () => {
   const [startdate, setStartdate] = useState("");
   const [enddate, setEnddate] = useState("");
 
+  // get events on the component render
   useEffect(() => {
     fetch("/events")
       .then((res) => res.json())
@@ -28,6 +31,7 @@ const CalenderEvents = () => {
       });
   }, []);
 
+  // onclcik event of the submit button
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
