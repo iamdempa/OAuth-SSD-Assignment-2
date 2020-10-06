@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
+import { useForm } from "react-hook-form";
 import CalendarEventsCreate from "./calendar";
 
 import "./App.scss";
@@ -10,25 +11,13 @@ import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 
 const CalenderEvents = () => {
   const [data, setData] = useState([]);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(false);
 
   const [summary, setSummary] = useState("");
+  const [location, setLocation] = useState("");
   const [descripion, setDescription] = useState("");
-
-  const fields = [
-    { key: "image", _style: { width: "10%" } },
-    { key: "name" },
-    "number",
-  ];
-
-  // useEffect(() => {
-  //   fetch("/events").then((res) => {
-  //     return res.json()
-  //   }).then((responseJson) => {
-  //     console.log(responseJson);
-  //     setData(data);
-  //   })
-  // });
+  const [startdate, setStartdate] = useState("");
+  const [enddate, setEnddate] = useState("");
 
   useEffect(() => {
     fetch("/events")
@@ -38,6 +27,75 @@ const CalenderEvents = () => {
         setData(res);
       });
   }, []);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    console.log(startdate);
+    let splitDate = startdate.split("-");
+    let month = splitDate[1];
+    let date = splitDate[2];
+    let year = splitDate[0];
+
+    console.log(enddate);
+    let splitEnd = enddate.split("-");
+    let month_end = splitEnd[1];
+    let date_end = splitEnd[2];
+    let year_end = splitEnd[0];
+
+    let newStartDate = year + "-" + month + "-" + date + "T09:00:00-07:00";
+    console.log("New Start Date: " + newStartDate);
+    let newEndDate =
+      year_end + "-" + month_end + "-" + date_end + "T17:00:00-07:00";
+
+    console.log("New End Date: " + newEndDate);
+
+    var testEvent = {
+      summary: summary,
+      location: location,
+      description: descripion,
+      start: {
+        dateTime: newStartDate,
+        timeZone: "America/Los_Angeles",
+      },
+      end: {
+        dateTime: newEndDate,
+        timeZone: "America/Los_Angeles",
+      },
+    };
+
+    try {
+      axios
+        .post("http://localhost:5000/create", {
+          testEvent,
+        })
+
+        .then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      setErrors(false);
+    } catch (error) {
+      setErrors(true);
+    }
+
+    // alert(errors);
+
+    setTimeout(function () {
+      setSummary("");
+      setLocation("");
+      setDescription("");
+      setStartdate("");
+      setEnddate("");
+
+      window.location.reload();
+    }, 2000);
+  };
+
   return (
     <div>
       <CalendarEventsCreate />
@@ -106,18 +164,62 @@ const CalenderEvents = () => {
         <Row>
           <Col></Col>
           <Col>
-            <Form>
+            <Form style={{ marginBottom: 30 }} onSubmit={handleSubmit}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Event Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Title" />
+                <Form.Control
+                  name="summary"
+                  type="text"
+                  placeholder="Enter title"
+                  onChange={(e) => setSummary(e.target.value)}
+                />
                 <Form.Text className="text-muted">
                   This is the title of your event
                 </Form.Text>
               </Form.Group>
 
               <Form.Group controlId="formBasicEmail">
+                <Form.Label>Event Location</Form.Label>
+                <Form.Control
+                  name="location"
+                  type="text"
+                  placeholder="Enter address"
+                  onChange={(e) => setLocation(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formBasicEmail">
                 <Form.Label>Event Description</Form.Label>
-                <Form.Control type="text" placeholder="Enter description" />
+                <Form.Control
+                  name="description"
+                  type="text"
+                  placeholder="Enter description"
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Start Date</Form.Label>
+                <Form.Control
+                  name="startdate"
+                  type="date"
+                  placeholder="Select start date"
+                  onChange={(e) => {
+                    setStartdate(e.target.value);
+                  }}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>End Date</Form.Label>
+                <Form.Control
+                  name="enddate"
+                  type="date"
+                  placeholder="Select end date"
+                  onChange={(e) => {
+                    setEnddate(e.target.value);
+                  }}
+                />
               </Form.Group>
 
               <Button variant="success" type="submit">
