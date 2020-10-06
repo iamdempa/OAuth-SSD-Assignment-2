@@ -48350,7 +48350,7 @@ var CalenderEvents = function CalenderEvents() {
       style: {
         width: "18rem"
       }
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, item.summary.length > 20 ? item.summary.substring(0, 20) + "..." : item.summary), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, item.description.length > 100 ? item.description.substring(0, 100) + "..." : item.description))));
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, item.summary != null || item.summary == undefined ? item.summary.length >= 20 ? item.summary.substring(0, 20) + "..." : item.summary : /*#__PURE__*/_react.default.createElement("p", null)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, item.descripion == null || item.descripion == undefined ? /*#__PURE__*/_react.default.createElement("p", null) : item.description.length >= 100 ? item.description.substring(0, 100) + "..." : item.description))));
   }))), data.length == 0 ? /*#__PURE__*/_react.default.createElement("p", null) : /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement("hr", null))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement("h4", null, "Create a Calendar Event"), /*#__PURE__*/_react.default.createElement("hr", null))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
     style: {
       marginBottom: 30
@@ -48438,7 +48438,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41331" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56740" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
